@@ -9,6 +9,8 @@ import 'package:barcode_scan/barcode_scan.dart';
 import 'package:wang_ship/bill_model.dart';
 import 'package:wang_ship/customer_sign.dart';
 
+import 'package:wang_ship/check_order_detail.dart';
+
 
 class CheckOrderPage extends StatefulWidget {
   @override
@@ -134,8 +136,9 @@ class _CheckOrderPageState extends State<CheckOrderPage> {
                 ],
               ),
               trailing: IconButton(
-                  icon: Icon(Icons.local_shipping, size: 40, color: (a.shipBillShipStatus == 1)?Colors.green:Colors.deepOrange,),
+                  icon: Icon(Icons.local_shipping, size: 40, color:(a.shipBillShipStatus == 1)?Colors.green:Colors.deepOrange,),
                   onPressed: (){
+                    getOrderBillDetail();
                     //addToOrderFast(productAll[index]);
                   }
               ),
@@ -150,6 +153,12 @@ class _CheckOrderPageState extends State<CheckOrderPage> {
     Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => CustomerSignPage(billOrderShip: val)));
+  }
+
+  getOrderBillDetail(){
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => CheckOrderDetailPage()));
   }
 
   @override
