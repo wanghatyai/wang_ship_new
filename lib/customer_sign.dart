@@ -130,19 +130,20 @@ class _CustomerSignPageState extends State<CustomerSignPage> {
 
     print(multipartFile1.field);
 
-    showToastAddFast();
+    //showToastAddFast();
     //Navigator.of(context).pop();
-    Navigator.pushReplacementNamed(context, '/Home');
+    //Navigator.pushReplacementNamed(context, '/Home');
 
-    //var response = await request.send();
+    var response = await request.send();
 
-    /*if(response.statusCode == 200){
+    if(response.statusCode == 200){
       print('OK OK');
 
       showToastAddFast();
-      Navigator.of(context).pop();
+      //Navigator.of(context).pop();
+      Navigator.pushReplacementNamed(context, '/Home');
 
-    }*/
+    }
 
     /*return showDialog<Null>(
         context: context,
