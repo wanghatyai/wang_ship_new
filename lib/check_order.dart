@@ -136,9 +136,9 @@ class _CheckOrderPageState extends State<CheckOrderPage> {
                 ],
               ),
               trailing: IconButton(
-                  icon: Icon(Icons.local_shipping, size: 40, color:(a.shipBillShipStatus == 1)?Colors.green:Colors.deepOrange,),
+                  icon: Icon(Icons.local_shipping, size: 40, color: Colors.deepOrange),
                   onPressed: (){
-                    getOrderBillDetail();
+                    getOrderBillDetail(a);
                     //addToOrderFast(productAll[index]);
                   }
               ),
@@ -155,10 +155,10 @@ class _CheckOrderPageState extends State<CheckOrderPage> {
         MaterialPageRoute(builder: (context) => CustomerSignPage(billOrderShip: val)));
   }
 
-  getOrderBillDetail(){
+  getOrderBillDetail(val){
     Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => CheckOrderDetailPage()));
+        MaterialPageRoute(builder: (context) => CheckOrderDetailPage(billOrderShipVal: val)));
   }
 
   @override
