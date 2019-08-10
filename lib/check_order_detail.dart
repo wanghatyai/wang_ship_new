@@ -4,6 +4,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image/image.dart' as img;
 
 import 'package:wang_ship/image_detail.dart';
+import 'package:wang_ship/customer_sign.dart';
+
+import 'package:http/http.dart' as http;
 
 class CheckOrderDetailPage extends StatefulWidget {
 
@@ -77,6 +80,56 @@ class _CheckOrderDetailPageState extends State<CheckOrderDetailPage> {
         typeCustomerGet = 4;
       }
     });
+  }
+
+  _signCustomer(val, e){
+
+    img.Image preImageFile1 = img.decodeImage(imageFile1.readAsBytesSync());
+    img.Image resizeImage1 = img.copyResize(preImageFile1, width: 800);
+
+    File resizeImageFile1 = File(imageFile1.path)
+      ..writeAsBytesSync(img.encodeJpg(resizeImage1, quality: 90));
+
+    /*var stream1 = http.ByteStream(
+        DelegatingStream.typed(resizeImageFile1.openRead()));
+    var imgLength1 = await resizeImageFile1.length();
+    var multipartFile1 = http.MultipartFile("runFile2", stream1, imgLength1,
+        filename: path.basename("resizeImageFile1.jpg"));*/
+
+    img.Image preImageFile2 = img.decodeImage(imageFile2.readAsBytesSync());
+    img.Image resizeImage2 = img.copyResize(preImageFile2, width: 800);
+
+    File resizeImageFile2 = File(imageFile2.path)
+      ..writeAsBytesSync(img.encodeJpg(resizeImage2, quality: 90));
+
+    /*var stream2 = http.ByteStream(
+        DelegatingStream.typed(resizeImageFile2.openRead()));
+    var imgLength2 = await resizeImageFile2.length();
+    var multipartFile2 = http.MultipartFile("runFile2ex", stream2, imgLength2,
+        filename: path.basename("resizeImageFile2.jpg"));*/
+
+    img.Image preImageFile3 = img.decodeImage(imageFile3.readAsBytesSync());
+    img.Image resizeImage3 = img.copyResize(preImageFile3, width: 800);
+
+    File resizeImageFile3 = File(imageFile3.path)
+      ..writeAsBytesSync(img.encodeJpg(resizeImage3, quality: 90));
+
+    /*var stream3 = http.ByteStream(
+        DelegatingStream.typed(resizeImageFile3.openRead()));
+    var imgLength3 = await resizeImageFile3.length();
+    var multipartFile3 = http.MultipartFile(
+        "runFile2priceTag", stream3, imgLength3,
+        filename: path.basename("resizeImageFile3.jpg"));*/
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => CustomerSignPage(
+            billOrderShip: val,
+            typeCustomerGet: e,
+            filePic1: resizeImageFile1,
+            filePic2: resizeImageFile2,
+            filePic3: resizeImageFile3
+        )));
   }
 
   @override
@@ -237,7 +290,7 @@ class _CheckOrderDetailPageState extends State<CheckOrderDetailPage> {
                 child: RaisedButton (
                   color: Colors.green,
                   onPressed: (){
-
+                    _signCustomer(widget.billOrderShipVal, typeCustomerGet);
                   },
                   child: Text (
                     'ลายเช็น',
