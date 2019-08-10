@@ -5,6 +5,8 @@ import 'dart:convert';
 import 'package:wang_ship/bill_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:wang_ship/report_detail.dart';
+
 class ReportPage extends StatefulWidget {
 
   @override
@@ -84,9 +86,9 @@ class _ReportPageState extends State<ReportPage> {
           return ListTile(
             contentPadding: EdgeInsets.fromLTRB(10, 1, 10, 1),
             onTap: (){
-              //Navigator.push(
-              //context,
-              //MaterialPageRoute(builder: (context) => ReportDetailPage(receiveProducts: orderBillAll[index])));
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ReportDetailPage(billOrderShipVal: orderBillAll[index])));
             },
             leading: Text('${orderBillAll[index].shipBillQty} ลัง', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
             title: Text('[${orderBillAll[index].shipBillCusCode}] ${orderBillAll[index].shipBillCusName}', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis),
