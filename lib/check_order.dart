@@ -11,6 +11,8 @@ import 'package:wang_ship/customer_sign.dart';
 
 import 'package:wang_ship/check_order_detail.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class CheckOrderPage extends StatefulWidget {
   @override
@@ -24,14 +26,21 @@ class _CheckOrderPageState extends State<CheckOrderPage> {
   var loading = false;
   List<Bill> _billShip = [];
 
+  String username;
+
   searchBill(searchVal) async{
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    username = prefs.getString("empCodeShipping");
 
     setState(() {
       loading = true;
     });
     _billShip.clear();
 
-    final res = await http.get('http://wangpharma.com/API/shippingProduct.php?SearchVal=$searchVal&act=Search');
+    final res = await http.get('http://wangpharma.com/API/shippingProduct.php?SearchVal=$searchVal&username=$username&act=Search');
+
+    print('http://wangpharma.com/API/shippingProduct.php?SearchVal=$searchVal&username=$username&act=Search');
 
     if(res.statusCode == 200){
 
@@ -125,7 +134,7 @@ class _CheckOrderPageState extends State<CheckOrderPage> {
             return ListTile(
               contentPadding: EdgeInsets.fromLTRB(10, 1, 10, 1),
               onTap: (){
-                _signCustomer(a);
+                getOrderBillDetail(a);
               },
               leading: Text('${a.shipBillQty} ลัง', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
               title: Text('[${a.shipBillCusCode}] ${a.shipBillCusName}', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis),
