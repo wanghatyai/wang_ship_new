@@ -8,6 +8,8 @@ import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:path/path.dart' as pathh;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -22,7 +24,18 @@ const directoryName = 'Signature';
 class CustomerSignPage extends StatefulWidget {
 
   var billOrderShip;
-  CustomerSignPage({Key key, this.billOrderShip}) : super(key: key);
+  var typeCustomerGet;
+  File filePic1;
+  File filePic2;
+  File filePic3;
+
+  CustomerSignPage({Key key,
+    this.billOrderShip,
+    this.typeCustomerGet,
+    this.filePic1,
+    this.filePic2,
+    this.filePic3
+  }) : super(key: key);
 
   @override
   _CustomerSignPageState createState() => _CustomerSignPageState();
@@ -32,6 +45,7 @@ class _CustomerSignPageState extends State<CustomerSignPage> {
 
   GlobalKey<SignatureState> signatureKey = GlobalKey();
   var image;
+  String username;
 
   //File imageCusSign;
 
@@ -102,6 +116,9 @@ class _CustomerSignPageState extends State<CustomerSignPage> {
 
   showImage(BuildContext context) async {
 
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    username = prefs.getString("empCodeShipping");
+
     var uri = Uri.parse("http://wangpharma.com/API/addShippingProduct.php");
     var request = http.MultipartRequest("POST", uri);
 
@@ -120,19 +137,44 @@ class _CustomerSignPageState extends State<CustomerSignPage> {
     File imageCusSign = File('$path/$directoryName/${formattedDate()}.png')
       ..writeAsBytesSync(pngBytes.buffer.asInt8List());
 
-    var stream1 = http.ByteStream(DelegatingStream.typed(imageCusSign.openRead()));
-    var imgLength1 = await imageCusSign.length();
-    var multipartFile1 = http.MultipartFile("cusSign", stream1, imgLength1,
+    var streamS = http.ByteStream(DelegatingStream.typed(imageCusSign.openRead()));
+    var imgLengthS = await imageCusSign.length();
+    var multipartFileS = http.MultipartFile("cusSign", streamS, imgLengthS,
         filename: pathh.basename("cusSign.png"));
 
+    var stream1 = http.ByteStream(
+        DelegatingStream.typed(widget.filePic1.openRead()));
+    var imgLength1 = await widget.filePic1.length();
+    var multipartFile1 = http.MultipartFile("sBoxPic", stream1, imgLength1,
+        filename: pathh.basename("resizeImageFile1.jpg"));
+
+    var stream2 = http.ByteStream(
+        DelegatingStream.typed(widget.filePic2.openRead()));
+    var imgLength2 = await widget.filePic2.length();
+    var multipartFile2 = http.MultipartFile("sStorePic", stream2, imgLength2,
+        filename: pathh.basename("resizeImageFile2.jpg"));
+
+    var stream3 = http.ByteStream(
+        DelegatingStream.typed(widget.filePic3.openRead()));
+    var imgLength3 = await widget.filePic3.length();
+    var multipartFile3 = http.MultipartFile("sCusReceivePic", stream3, imgLength3,
+        filename: pathh.basename("resizeImageFile3.jpg"));
+
+    request.files.add(multipartFileS);
+
     request.files.add(multipartFile1);
-    request.fields['idOrderBillShip'] = widget.billOrderShip.shipBillId;
+    request.files.add(multipartFile2);
+    request.files.add(multipartFile3);
 
+    request.fields['sIdCus'] = widget.billOrderShip.shipBillCusID;
+    request.fields['sWhoShip'] = username;
+    request.fields['sCusReceiveType'] = widget.typeCustomerGet.toString();
+
+    print(multipartFileS.field);
     print(multipartFile1.field);
+    print(request.fields);
 
-    //showToastAddFast();
-    //Navigator.of(context).pop();
-    //Navigator.pushReplacementNamed(context, '/Home');
+    Navigator.pushReplacementNamed(context, '/Home');
 
     var response = await request.send();
 
