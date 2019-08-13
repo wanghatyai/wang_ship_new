@@ -21,20 +21,29 @@ class _CheckOrderDetailPageState extends State<CheckOrderDetailPage> {
 
   File imageFile1;
   File imageFile2;
-  File imageFile3;
+  //File imageFile3;
 
   int typeCustomerGet;
+
+  //var loading = false;
 
   _openCamera(camPosition) async {
     var picture = await ImagePicker.pickImage(source: ImageSource.camera);
     this.setState((){
-      if(camPosition == 1){
+      /*if(camPosition == 1){
         imageFile1 = picture;
       }else if(camPosition == 2){
         imageFile2 = picture;
       }else{
         imageFile3 = picture;
+      }*/
+
+      if(camPosition == 1){
+        imageFile1 = picture;
+      }else{
+        imageFile2 = picture;
       }
+
     });
     //Navigator.of(context).pop();
   }
@@ -43,12 +52,18 @@ class _CheckOrderDetailPageState extends State<CheckOrderDetailPage> {
 
     File imageFileC;
 
-    if(camPosition == 1){
+    /*if(camPosition == 1){
       imageFileC = imageFile1;
     }else if(camPosition == 2){
       imageFileC = imageFile2;
     }else{
       imageFileC = imageFile3;
+    }*/
+
+    if(camPosition == 1){
+      imageFileC = imageFile1;
+    }else{
+      imageFileC = imageFile2;
     }
 
     if(imageFileC == null){
@@ -84,6 +99,10 @@ class _CheckOrderDetailPageState extends State<CheckOrderDetailPage> {
 
   _signCustomer(val, e){
 
+    /*setState(() {
+      loading = true;
+    });*/
+
     img.Image preImageFile1 = img.decodeImage(imageFile1.readAsBytesSync());
     img.Image resizeImage1 = img.copyResize(preImageFile1, width: 800);
 
@@ -108,11 +127,10 @@ class _CheckOrderDetailPageState extends State<CheckOrderDetailPage> {
     var multipartFile2 = http.MultipartFile("runFile2ex", stream2, imgLength2,
         filename: path.basename("resizeImageFile2.jpg"));*/
 
-    img.Image preImageFile3 = img.decodeImage(imageFile3.readAsBytesSync());
+    /*img.Image preImageFile3 = img.decodeImage(imageFile3.readAsBytesSync());
     img.Image resizeImage3 = img.copyResize(preImageFile3, width: 800);
-
     File resizeImageFile3 = File(imageFile3.path)
-      ..writeAsBytesSync(img.encodeJpg(resizeImage3, quality: 90));
+      ..writeAsBytesSync(img.encodeJpg(resizeImage3, quality: 90));*/
 
     /*var stream3 = http.ByteStream(
         DelegatingStream.typed(resizeImageFile3.openRead()));
@@ -127,8 +145,8 @@ class _CheckOrderDetailPageState extends State<CheckOrderDetailPage> {
             billOrderShip: val,
             typeCustomerGet: e,
             filePic1: resizeImageFile1,
-            filePic2: resizeImageFile2,
-            filePic3: resizeImageFile3
+            filePic2: resizeImageFile2
+          //filePic3: resizeImageFile3
         )));
   }
 
@@ -213,7 +231,7 @@ class _CheckOrderDetailPageState extends State<CheckOrderDetailPage> {
                     ],
                   ),
                 ),
-                Expanded(
+                /*Expanded(
                   flex: 2,
                   child: Column(
                     children: <Widget>[
@@ -229,7 +247,7 @@ class _CheckOrderDetailPageState extends State<CheckOrderDetailPage> {
                       ),
                     ],
                   ),
-                ),
+                ),*/
               ],
             ),
             Container(
@@ -292,7 +310,7 @@ class _CheckOrderDetailPageState extends State<CheckOrderDetailPage> {
                   onPressed: (){
                     _signCustomer(widget.billOrderShipVal, typeCustomerGet);
                   },
-                  child: Text (
+                  child:Text (
                     'ลายเช็น',
                     style: TextStyle (
                       color: Colors.white,
