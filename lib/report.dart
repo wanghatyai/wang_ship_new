@@ -100,7 +100,7 @@ class _ReportPageState extends State<ReportPage> {
               ],
             ),
             trailing: IconButton(
-                icon: Icon(Icons.local_shipping, size: 40, color: Colors.deepOrange,),
+                icon: Icon(Icons.local_shipping, size: 40, color: Colors.lightBlue,),
                 onPressed: (){
                   //addToOrderFast(productAll[index]);
                 }
