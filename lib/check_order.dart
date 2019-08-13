@@ -21,6 +21,10 @@ class CheckOrderPage extends StatefulWidget {
 
 class _CheckOrderPageState extends State<CheckOrderPage> {
 
+  TextEditingController barcodeProduct = TextEditingController();
+
+  List<Bill> _search = [];
+
   String barcode;
 
   var loading = false;
@@ -145,7 +149,7 @@ class _CheckOrderPageState extends State<CheckOrderPage> {
                 ],
               ),
               trailing: IconButton(
-                  icon: Icon(Icons.local_shipping, size: 40, color: Colors.deepOrange),
+                  icon: Icon(Icons.local_shipping, size: 40, color: Colors.lightBlue),
                   onPressed: (){
                     getOrderBillDetail(a);
                     //addToOrderFast(productAll[index]);
@@ -158,11 +162,11 @@ class _CheckOrderPageState extends State<CheckOrderPage> {
     }
   }
 
-  _signCustomer(val){
+  /*_signCustomer(val){
     Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => CustomerSignPage(billOrderShip: val)));
-  }
+  }*/
 
   getOrderBillDetail(val){
     Navigator.push(
@@ -175,6 +179,22 @@ class _CheckOrderPageState extends State<CheckOrderPage> {
     super.initState();
   }
 
+  onSearch(String text) async{
+    _search.clear();
+    if(text.isEmpty){
+      setState(() {});
+      return;
+    }
+
+    searchBill(text);
+
+    _billShip.forEach((f){
+      if(f.shipBillCusCode.contains(text)) _search.add(f);
+    });
+
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -184,7 +204,43 @@ class _CheckOrderPageState extends State<CheckOrderPage> {
             children: <Widget>[
               Padding (
                 padding: const EdgeInsets.all(20),
-                child: SizedBox (
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container(
+                      //padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
+                      child: IconButton(
+                          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          icon: Icon(Icons.settings_overscan, size: 50, color: Colors.red,),
+                          onPressed: (){
+                            scanBarcode();
+                            //Navigator.push(context, MaterialPageRoute(builder: (context) => OrderPage()));
+                          }
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                        child: TextField (
+                          controller: barcodeProduct,
+                          onChanged: onSearch,
+                          style: TextStyle (
+                            fontSize: 18,
+                            color: Colors.black,
+                          ),
+                          decoration: InputDecoration (
+                              labelText: 'Code ลูกค้า',
+                              labelStyle: TextStyle (
+                                fontSize: (15),
+                              )
+                          ),
+                          keyboardType: TextInputType.number,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                /*child: SizedBox (
                   width: double.infinity,
                   height: 56,
                   child: RaisedButton (
@@ -199,7 +255,7 @@ class _CheckOrderPageState extends State<CheckOrderPage> {
                       ),
                     ),
                   ),
-                ),
+                ),*/
               ),
               /*Padding (
               padding: const EdgeInsets.all(20),
