@@ -5,6 +5,8 @@ import 'dart:convert';
 import 'package:wang_ship/check_order.dart';
 import 'package:wang_ship/report.dart';
 
+import 'package:wang_ship/report_all.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -17,7 +19,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   int currentIndex = 0;
-  List pages = [CheckOrderPage(), ReportPage()];
+  List pages = [CheckOrderPage(), ReportPage(), ReportAllPage()];
 
 
   @override
@@ -40,8 +42,12 @@ class _HomeState extends State<Home> {
               title: Text('ส่งสินค้า', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))
           ),
           BottomNavigationBarItem(
+              icon: Icon(Icons.account_box),
+              title: Text('รายงานส่วนตัว', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))
+          ),
+          BottomNavigationBarItem(
               icon: Icon(Icons.view_list),
-              title: Text('รายงาน', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))
+              title: Text('รายงานทั้งหมด', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))
           ),
         ]
     );
