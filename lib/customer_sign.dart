@@ -27,14 +27,14 @@ class CustomerSignPage extends StatefulWidget {
   var typeCustomerGet;
   File filePic1;
   File filePic2;
-  File filePic3;
+  //File filePic3;
 
   CustomerSignPage({Key key,
     this.billOrderShip,
     this.typeCustomerGet,
     this.filePic1,
-    this.filePic2,
-    this.filePic3
+    this.filePic2
+    //this.filePic3
   }) : super(key: key);
 
   @override
@@ -70,7 +70,6 @@ class _CustomerSignPageState extends State<CustomerSignPage> {
         backgroundColor: Colors.deepOrange,
         title: Text("ลงลายมือรับสินค้า"),
         actions: <Widget>[
-
         ],
       ),*/
       body: Signature(key: signatureKey),
@@ -108,10 +107,8 @@ class _CustomerSignPageState extends State<CustomerSignPage> {
   }
 
   /*addSignToServ(){
-
     var uri = Uri.parse("http://wangpharma.com/API/addShippingProduct.php");
     var request = http.MultipartRequest("POST", uri);
-
   }*/
 
   showImage(BuildContext context) async {
@@ -154,17 +151,17 @@ class _CustomerSignPageState extends State<CustomerSignPage> {
     var multipartFile2 = http.MultipartFile("sStorePic", stream2, imgLength2,
         filename: pathh.basename("resizeImageFile2.jpg"));
 
-    var stream3 = http.ByteStream(
+    /*var stream3 = http.ByteStream(
         DelegatingStream.typed(widget.filePic3.openRead()));
     var imgLength3 = await widget.filePic3.length();
     var multipartFile3 = http.MultipartFile("sCusReceivePic", stream3, imgLength3,
-        filename: pathh.basename("resizeImageFile3.jpg"));
+        filename: pathh.basename("resizeImageFile3.jpg"));*/
 
     request.files.add(multipartFileS);
 
     request.files.add(multipartFile1);
     request.files.add(multipartFile2);
-    request.files.add(multipartFile3);
+    //request.files.add(multipartFile3);
 
     request.fields['sIdCus'] = widget.billOrderShip.shipBillCusID;
     request.fields['sWhoShip'] = username;
@@ -174,7 +171,7 @@ class _CustomerSignPageState extends State<CustomerSignPage> {
     print(multipartFile1.field);
     print(request.fields);
 
-    Navigator.pushReplacementNamed(context, '/Home');
+    //Navigator.pushReplacementNamed(context, '/Home');
 
     var response = await request.send();
 
