@@ -15,6 +15,7 @@ class Bill{
   final String shipBillWhoShip;
   final String shipBillPrintStatus;
   final String shipBillDateCreate;
+  final String shipBillDateShipping;
 
   Bill({
     this.shipBillId,
@@ -32,7 +33,8 @@ class Bill{
     this.shipBillShipStatus,
     this.shipBillWhoShip,
     this.shipBillPrintStatus,
-    this.shipBillDateCreate
+    this.shipBillDateCreate,
+    this.shipBillDateShipping
   });
 
   factory Bill.fromJson(Map<String, dynamic> json){
@@ -53,6 +55,7 @@ class Bill{
       shipBillWhoShip: json['sWhoShip'],
       shipBillPrintStatus: json['sPrinted'],
       shipBillDateCreate: json['sDateCreate'],
+      shipBillDateShipping: json['sDateShipping'],
     );
   }
 
