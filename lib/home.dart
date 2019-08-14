@@ -12,14 +12,36 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 class Home extends StatefulWidget {
+
+  //var usernameVal;
+  //Home({Key key, this.usernameVal}) : super(key: key);
+
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
 
+  String usernameVal;
+  var username;
+
   int currentIndex = 0;
   List pages = [CheckOrderPage(), ReportPage(), ReportAllPage()];
+
+  getCodeEmpShip() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      username = prefs.getString("empCodeShipping");
+    });
+    return username;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getCodeEmpShip();
+  }
 
 
   @override
@@ -55,7 +77,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepOrange,
-        title: Text("ระบบส่งสินค้า"),
+        title: Text("ระบบส่งสินค้า - รหัสพนักงาน ${username}"),
         actions: <Widget>[
 
         ],
