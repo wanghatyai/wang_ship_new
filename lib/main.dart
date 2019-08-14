@@ -150,7 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             fontSize: 15,
                           ),
                         ),
-                        keyboardType: TextInputType.text,
+                        keyboardType: TextInputType.number,
                       ),
                     ],
                   ),
