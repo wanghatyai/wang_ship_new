@@ -176,7 +176,7 @@ class _CustomerSignPageState extends State<CustomerSignPage> {
 
     //Navigator.pushReplacementNamed(context, '/Home');
 
-    /*var response = await request.send();
+    var response = await request.send();
 
     if(response.statusCode == 200){
       print('OK OK');
@@ -185,7 +185,7 @@ class _CustomerSignPageState extends State<CustomerSignPage> {
       //Navigator.of(context).pop();
       Navigator.pushReplacementNamed(context, '/Home');
 
-    }*/
+    }
 
     /*return showDialog<Null>(
         context: context,
