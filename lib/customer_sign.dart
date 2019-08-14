@@ -80,9 +80,12 @@ class _CustomerSignPageState extends State<CustomerSignPage> {
             signatureKey.currentState.clearPoints();
           },
         ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(120, 0, 120, 0),
+        Container(
+            width: 230,
+            child: Text("${widget.billOrderShip.shipBillCusName} : ${widget.billOrderShip.shipBillQty} ลัง",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis),
         ),
+
         FlatButton(
           child: Text('บันทึก', style: TextStyle(fontSize: 20, color: Colors.green, fontWeight: FontWeight.bold), ),
           onPressed: () {
@@ -173,7 +176,7 @@ class _CustomerSignPageState extends State<CustomerSignPage> {
 
     //Navigator.pushReplacementNamed(context, '/Home');
 
-    var response = await request.send();
+    /*var response = await request.send();
 
     if(response.statusCode == 200){
       print('OK OK');
@@ -182,7 +185,7 @@ class _CustomerSignPageState extends State<CustomerSignPage> {
       //Navigator.of(context).pop();
       Navigator.pushReplacementNamed(context, '/Home');
 
-    }
+    }*/
 
     /*return showDialog<Null>(
         context: context,
