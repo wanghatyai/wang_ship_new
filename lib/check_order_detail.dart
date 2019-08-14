@@ -107,7 +107,7 @@ class _CheckOrderDetailPageState extends State<CheckOrderDetailPage> {
     img.Image resizeImage1 = img.copyResize(preImageFile1, width: 800);
 
     File resizeImageFile1 = File(imageFile1.path)
-      ..writeAsBytesSync(img.encodeJpg(resizeImage1, quality: 90));
+      ..writeAsBytesSync(img.encodeJpg(resizeImage1, quality: 80));
 
     /*var stream1 = http.ByteStream(
         DelegatingStream.typed(resizeImageFile1.openRead()));
@@ -119,7 +119,7 @@ class _CheckOrderDetailPageState extends State<CheckOrderDetailPage> {
     img.Image resizeImage2 = img.copyResize(preImageFile2, width: 800);
 
     File resizeImageFile2 = File(imageFile2.path)
-      ..writeAsBytesSync(img.encodeJpg(resizeImage2, quality: 90));
+      ..writeAsBytesSync(img.encodeJpg(resizeImage2, quality: 80));
 
     /*var stream2 = http.ByteStream(
         DelegatingStream.typed(resizeImageFile2.openRead()));
