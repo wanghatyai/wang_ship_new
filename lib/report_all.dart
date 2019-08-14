@@ -95,7 +95,6 @@ class _ReportAllPageState extends State<ReportAllPage> {
               children: <Widget>[
                 Text('พิมพ์สติ๊กเกอร์ : ${orderBillAll[index].shipBillDateCreate}', style: TextStyle(color: Colors.pink),),
                 Text('ที่อยู่ : ${orderBillAll[index].shipBillCusAddress}', style: TextStyle(color: Colors.teal),),
-                Text('สแกนส่ง : ${orderBillAll[index].shipBillDateShipping}', style: TextStyle(color: Colors.pink),),
               ],
             ),
             trailing: IconButton(
