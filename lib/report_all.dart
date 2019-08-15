@@ -28,7 +28,7 @@ class _ReportAllPageState extends State<ReportAllPage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     username = prefs.getString("empCodeShipping");
 
-    final res = await http.get('http://wangpharma.com/API/shippingProduct.php?PerPage=$perPage&act=$act');
+    final res = await http.get('https://wangpharma.com/API/shippingProduct.php?PerPage=$perPage&act=$act');
 
     if(res.statusCode == 200){
 

@@ -119,7 +119,7 @@ class _CustomerSignPageState extends State<CustomerSignPage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     username = prefs.getString("empCodeShipping");
 
-    var uri = Uri.parse("http://wangpharma.com/API/addShippingProduct.php");
+    var uri = Uri.parse("https://wangpharma.com/API/addShippingProduct.php");
     var request = http.MultipartRequest("POST", uri);
 
     var pngBytes = await image.toByteData(format: ui.ImageByteFormat.png);

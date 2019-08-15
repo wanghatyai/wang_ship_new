@@ -42,9 +42,9 @@ class _CheckOrderPageState extends State<CheckOrderPage> {
     });
     _billShip.clear();
 
-    final res = await http.get('http://wangpharma.com/API/shippingProduct.php?SearchVal=$searchVal&username=$username&act=Search');
+    final res = await http.get('https://wangpharma.com/API/shippingProduct.php?SearchVal=$searchVal&username=$username&act=Search');
 
-    print('http://wangpharma.com/API/shippingProduct.php?SearchVal=$searchVal&username=$username&act=Search');
+    //print('http://wangpharma.com/API/shippingProduct.php?SearchVal=$searchVal&username=$username&act=Search');
 
     if(res.statusCode == 200){
 
