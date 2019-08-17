@@ -23,6 +23,8 @@ class _ReportAllPageState extends State<ReportAllPage> {
   String act = "GetShipAll";
   String username;
 
+  List shipType = ['_','บริการส่ง','ฝากรถ','รับเองที่คลัง','รับเองที่หจก','พร้อมรถ'];
+
   getShipBill() async{
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -94,7 +96,8 @@ class _ReportAllPageState extends State<ReportAllPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text('พิมพ์สติ๊กเกอร์ : ${orderBillAll[index].shipBillDateCreate}', style: TextStyle(color: Colors.pink),),
-                Text('ที่อยู่ : ${orderBillAll[index].shipBillCusAddress}', style: TextStyle(color: Colors.teal),),
+                Text('ที่อยู่ : ${orderBillAll[index].shipBillCusAddress}', style: TextStyle(color: Colors.teal), overflow: TextOverflow.ellipsis),
+                Text('รูปแบบการส่ง : ${shipType[int.parse(orderBillAll[index].shipBillShipType)]}', style: TextStyle(color: Colors.purple)),
               ],
             ),
             trailing: IconButton(
