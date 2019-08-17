@@ -22,6 +22,8 @@ class _ReportDetailPageState extends State<ReportDetailPage> {
         child: Column(
           children: <Widget>[
             Text('ร้าน: ${widget.billOrderShipVal.shipBillCusName}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+            Text('ที่อยู่: ${widget.billOrderShipVal.shipBillCusAddress}', style: TextStyle(fontSize: 16)),
+            Text('เวลาเปิดร้าน: ${widget.billOrderShipVal.shipBillCusOpenStoreTime}', style: TextStyle(fontSize: 16)),
             Container(
               padding: EdgeInsets.fromLTRB(20, 2, 20, 2),
               width: double.infinity,
