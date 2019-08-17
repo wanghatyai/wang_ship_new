@@ -10,8 +10,10 @@ class Bill{
   final String shipBillCusCode;
   final String shipBillCusName;
   final String shipBillCusAddress;
+  final String shipBillCusOpenStoreTime;
   final String shipBillQty;
   final String shipBillShipStatus;
+  final String shipBillShipType;
   final String shipBillWhoShip;
   final String shipBillPrintStatus;
   final String shipBillDateCreate;
@@ -29,8 +31,10 @@ class Bill{
     this.shipBillCusCode,
     this.shipBillCusName,
     this.shipBillCusAddress,
+    this.shipBillCusOpenStoreTime,
     this.shipBillQty,
     this.shipBillShipStatus,
+    this.shipBillShipType,
     this.shipBillWhoShip,
     this.shipBillPrintStatus,
     this.shipBillDateCreate,
@@ -50,10 +54,12 @@ class Bill{
       shipBillCusCode: json['ccode'],
       shipBillCusName: json['name'],
       shipBillCusAddress: json['address'],
+      shipBillCusOpenStoreTime: json['timeOpen'],
       shipBillQty: json['sQt'],
       shipBillShipStatus: json['Shipped'],
       shipBillWhoShip: json['sWhoShip'],
       shipBillPrintStatus: json['sPrinted'],
+      shipBillShipType: json['sType'],
       shipBillDateCreate: json['sDateCreate'],
       shipBillDateShipping: json['sDateShipping'],
     );
