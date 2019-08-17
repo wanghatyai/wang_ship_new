@@ -11,6 +11,9 @@ class ReportDetailPage extends StatefulWidget {
 }
 
 class _ReportDetailPageState extends State<ReportDetailPage> {
+
+  List shipType = ['_','บริการส่ง','ฝากรถ','รับเองที่คลัง','รับเองที่หจก','พร้อมรถ'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,6 +60,12 @@ class _ReportDetailPageState extends State<ReportDetailPage> {
               width: double.infinity,
               color: Colors.blue,
               child: Text('พิมพ์สติ๊กเกอร์ : ${widget.billOrderShipVal.shipBillDateCreate}', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),),
+            ),
+            Container(
+              padding: EdgeInsets.fromLTRB(20, 2, 20, 2),
+              width: double.infinity,
+              color: Colors.purple,
+              child: Text('รูปแบบการส่ง : ${shipType[int.parse(widget.billOrderShipVal.shipBillShipType)]}', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),),
             ),
           ],
         ),
