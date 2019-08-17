@@ -96,7 +96,7 @@ class _ReportPageState extends State<ReportPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text('พิมพ์สติ๊กเกอร์ : ${orderBillAll[index].shipBillDateCreate}', style: TextStyle(color: Colors.pink),),
-                Text('ที่อยู่ : ${orderBillAll[index].shipBillCusAddress}', style: TextStyle(color: Colors.teal),),
+                Text('ที่อยู่ : ${orderBillAll[index].shipBillCusAddress}', style: TextStyle(color: Colors.teal), overflow: TextOverflow.ellipsis),
                 Text('สแกนส่ง : ${orderBillAll[index].shipBillDateShipping}', style: TextStyle(color: Colors.pink),),
               ],
             ),
