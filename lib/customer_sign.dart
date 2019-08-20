@@ -15,6 +15,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:fluttertoast/fluttertoast.dart';
+//import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:geolocator/geolocator.dart';
 
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
@@ -43,6 +45,10 @@ class CustomerSignPage extends StatefulWidget {
 
 class _CustomerSignPageState extends State<CustomerSignPage> {
 
+  var currentLocation;
+
+  //GoogleMapController mapController;
+
   GlobalKey<SignatureState> signatureKey = GlobalKey();
   var image;
   String username;
@@ -52,6 +58,14 @@ class _CustomerSignPageState extends State<CustomerSignPage> {
   @override
   void initState() {
     super.initState();
+    Geolocator().getCurrentPosition().then((currloc){
+      setState(() {
+        currentLocation = currloc;
+        print('${currentLocation.latitude} -9999999-  ${currentLocation.longitude}');
+        //mapToggle = true;
+        //addMarkerShip();
+      });
+    });
   }
 
   showToastAddFast(){
@@ -169,6 +183,8 @@ class _CustomerSignPageState extends State<CustomerSignPage> {
     request.fields['sIdCus'] = widget.billOrderShip.shipBillCusID;
     request.fields['sWhoShip'] = username;
     request.fields['sCusReceiveType'] = widget.typeCustomerGet.toString();
+    request.fields['cusLatitude'] = currentLocation.latitude;
+    request.fields['cusLongitude'] = currentLocation.longitude;
 
     print(multipartFileS.field);
     print(multipartFile1.field);
