@@ -16,7 +16,6 @@ import 'dart:convert';
 
 import 'package:fluttertoast/fluttertoast.dart';
 //import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:geolocator/geolocator.dart';
 
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
@@ -27,6 +26,8 @@ class CustomerSignPage extends StatefulWidget {
 
   var billOrderShip;
   var typeCustomerGet;
+  var latitudeVal;
+  var longitudeVal;
   File filePic1;
   File filePic2;
   //File filePic3;
@@ -35,7 +36,9 @@ class CustomerSignPage extends StatefulWidget {
     this.billOrderShip,
     this.typeCustomerGet,
     this.filePic1,
-    this.filePic2
+    this.filePic2,
+    this.latitudeVal,
+    this.longitudeVal
     //this.filePic3
   }) : super(key: key);
 
@@ -45,7 +48,7 @@ class CustomerSignPage extends StatefulWidget {
 
 class _CustomerSignPageState extends State<CustomerSignPage> {
 
-  var currentLocation;
+  //var currentLocation;
 
   //GoogleMapController mapController;
 
@@ -58,14 +61,6 @@ class _CustomerSignPageState extends State<CustomerSignPage> {
   @override
   void initState() {
     super.initState();
-    Geolocator().getCurrentPosition().then((currloc){
-      setState(() {
-        currentLocation = currloc;
-        print('${currentLocation.latitude} -9999999-  ${currentLocation.longitude}');
-        //mapToggle = true;
-        //addMarkerShip();
-      });
-    });
   }
 
   showToastAddFast(){
@@ -95,9 +90,9 @@ class _CustomerSignPageState extends State<CustomerSignPage> {
           },
         ),
         Container(
-            width: 230,
-            child: Text("${widget.billOrderShip.shipBillCusName} : ${widget.billOrderShip.shipBillQty} ลัง",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis),
+          width: 230,
+          child: Text("${widget.billOrderShip.shipBillCusName} : ${widget.billOrderShip.shipBillQty} ลัง",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis),
         ),
 
         FlatButton(
@@ -183,12 +178,14 @@ class _CustomerSignPageState extends State<CustomerSignPage> {
     request.fields['sIdCus'] = widget.billOrderShip.shipBillCusID;
     request.fields['sWhoShip'] = username;
     request.fields['sCusReceiveType'] = widget.typeCustomerGet.toString();
-    request.fields['cusLatitude'] = currentLocation.latitude;
-    request.fields['cusLongitude'] = currentLocation.longitude;
+    request.fields['cusLatitude'] = widget.latitudeVal.toString();
+    request.fields['cusLongitude'] = widget.longitudeVal.toString();
 
     print(multipartFileS.field);
     print(multipartFile1.field);
     print(request.fields);
+    print(widget.latitudeVal.toString());
+    print(widget.longitudeVal.toString());
 
     //Navigator.pushReplacementNamed(context, '/Home');
 
