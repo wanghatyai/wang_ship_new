@@ -11,6 +11,8 @@ class Bill{
   final String shipBillCusName;
   final String shipBillCusAddress;
   final String shipBillCusOpenStoreTime;
+  final String shipBillCusLatitude;
+  final String shipBillCusLongitude;
   final String shipBillQty;
   final String shipBillShipStatus;
   final String shipBillShipType;
@@ -33,6 +35,8 @@ class Bill{
     this.shipBillCusName,
     this.shipBillCusAddress,
     this.shipBillCusOpenStoreTime,
+    this.shipBillCusLatitude,
+    this.shipBillCusLongitude,
     this.shipBillQty,
     this.shipBillShipStatus,
     this.shipBillShipType,
@@ -57,6 +61,8 @@ class Bill{
       shipBillCusName: json['name'],
       shipBillCusAddress: json['address'],
       shipBillCusOpenStoreTime: json['timeOpen'],
+      shipBillCusLatitude: json['latitude'],
+      shipBillCusLongitude: json['longitude'],
       shipBillQty: json['sQt'],
       shipBillShipStatus: json['Shipped'],
       shipBillWhoShip: json['sWhoShip'],
