@@ -6,6 +6,8 @@ import 'package:image/image.dart' as img;
 import 'package:wang_ship/image_detail.dart';
 import 'package:wang_ship/customer_sign.dart';
 
+import 'package:geolocator/geolocator.dart';
+
 import 'package:http/http.dart' as http;
 
 class CheckOrderDetailPage extends StatefulWidget {
@@ -25,7 +27,22 @@ class _CheckOrderDetailPageState extends State<CheckOrderDetailPage> {
 
   int typeCustomerGet;
 
+  var currentLocation;
+
   //var loading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Geolocator().getCurrentPosition().then((currloc){
+      setState(() {
+        currentLocation = currloc;
+        print('${currentLocation.latitude} --------  ${currentLocation.longitude}');
+        //mapToggle = true;
+        //addMarkerShip();
+      });
+    });
+  }
 
   _openCamera(camPosition) async {
     var picture = await ImagePicker.pickImage(source: ImageSource.camera);
@@ -145,7 +162,9 @@ class _CheckOrderDetailPageState extends State<CheckOrderDetailPage> {
             billOrderShip: val,
             typeCustomerGet: e,
             filePic1: resizeImageFile1,
-            filePic2: resizeImageFile2
+            filePic2: resizeImageFile2,
+            latitudeVal: currentLocation.latitude,
+            longitudeVal: currentLocation.longitude
           //filePic3: resizeImageFile3
         )));
   }
