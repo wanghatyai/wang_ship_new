@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
+import 'package:wang_ship/map_detail.dart';
 
 class ReportDetailPage extends StatefulWidget {
 
@@ -25,7 +26,22 @@ class _ReportDetailPageState extends State<ReportDetailPage> {
         child: Column(
           children: <Widget>[
             Text('ร้าน: ${widget.billOrderShipVal.shipBillCusName}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-            Text('ที่อยู่: ${widget.billOrderShipVal.shipBillCusAddress}', style: TextStyle(fontSize: 16)),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 4,
+                  child: Text('ที่อยู่: ${widget.billOrderShipVal.shipBillCusAddress}', style: TextStyle(fontSize: 16)),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: IconButton(icon: Icon(Icons.room, color: Colors.red, size: 40,),onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MapDetailPage(billOrderShipVal: widget.billOrderShipVal)));
+                  }),
+                ),
+              ],
+            ),
             Text('เวลาเปิดร้าน: ${widget.billOrderShipVal.shipBillCusOpenStoreTime}', style: TextStyle(fontSize: 16)),
             Container(
               padding: EdgeInsets.fromLTRB(20, 2, 20, 2),
