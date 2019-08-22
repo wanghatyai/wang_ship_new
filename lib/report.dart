@@ -123,7 +123,10 @@ class _ReportPageState extends State<ReportPage> {
               Container(
                 color: Colors.purple,
                 child: Center(
-                  child: orderBillLastShipFinis.isEmpty ? Text('') : Text('เวลา : ${orderBillLastShipFinis[0].shipBillDateShipFinis}', style: TextStyle(fontSize: 16, color: Colors.white), ),
+                  child: orderBillLastShipFinis.isEmpty ?
+                    Text('') : orderBillLastShipFinis[0].shipBillPeriod.isEmpty ?
+                      Text('เวลา : ${orderBillLastShipFinis[0].shipBillDateShipFinis}', style: TextStyle(fontSize: 16, color: Colors.white)) :
+                      Text('รอบที่ : ${orderBillLastShipFinis[0].shipBillPeriod.substring(10)} เวลา : ${orderBillLastShipFinis[0].shipBillDateShipFinis}', style: TextStyle(fontSize: 16, color: Colors.white), ),
                 ),
               ),
               isLoading ? CircularProgressIndicator()
