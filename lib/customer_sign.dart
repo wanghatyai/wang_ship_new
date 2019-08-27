@@ -63,6 +63,13 @@ class _CustomerSignPageState extends State<CustomerSignPage> {
     super.initState();
   }
 
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   showToastAddFast(){
     Fluttertoast.showToast(
         msg: "ยืนยันรับสินค้าแล้ว",
