@@ -29,7 +29,7 @@ class _CheckOrderDetailPageState extends State<CheckOrderDetailPage> {
 
   var currentLocation;
 
-  //var loading = false;
+  var loading = false;
 
   @override
   void initState() {
@@ -114,17 +114,34 @@ class _CheckOrderDetailPageState extends State<CheckOrderDetailPage> {
     });
   }
 
-  _signCustomer(val, e){
+  resizeImgFun(imageFile){
+
+    setState(() {
+      loading = true;
+    });
+
+    img.Image preImageFile = img.decodeImage(imageFile.readAsBytesSync());
+    img.Image resizeImage = img.copyResize(preImageFile, width: 800);
+
+    File resizeImageFile = File(imageFile.path)
+      ..writeAsBytesSync(img.encodeJpg(resizeImage, quality: 80));
+
+    return resizeImageFile;
+  }
+
+  _signCustomer(val, e) async{
 
     /*setState(() {
       loading = true;
     });*/
 
-    img.Image preImageFile1 = img.decodeImage(imageFile1.readAsBytesSync());
+    /*img.Image preImageFile1 = img.decodeImage(imageFile1.readAsBytesSync());
     img.Image resizeImage1 = img.copyResize(preImageFile1, width: 800);
 
     File resizeImageFile1 = File(imageFile1.path)
-      ..writeAsBytesSync(img.encodeJpg(resizeImage1, quality: 80));
+      ..writeAsBytesSync(img.encodeJpg(resizeImage1, quality: 80));*/
+
+    File resizeImageFile1 = await resizeImgFun(imageFile1);
 
     /*var stream1 = http.ByteStream(
         DelegatingStream.typed(resizeImageFile1.openRead()));
@@ -132,11 +149,13 @@ class _CheckOrderDetailPageState extends State<CheckOrderDetailPage> {
     var multipartFile1 = http.MultipartFile("runFile2", stream1, imgLength1,
         filename: path.basename("resizeImageFile1.jpg"));*/
 
-    img.Image preImageFile2 = img.decodeImage(imageFile2.readAsBytesSync());
+    /*img.Image preImageFile2 = img.decodeImage(imageFile2.readAsBytesSync());
     img.Image resizeImage2 = img.copyResize(preImageFile2, width: 800);
 
     File resizeImageFile2 = File(imageFile2.path)
-      ..writeAsBytesSync(img.encodeJpg(resizeImage2, quality: 80));
+      ..writeAsBytesSync(img.encodeJpg(resizeImage2, quality: 80));*/
+
+    File resizeImageFile2 = await resizeImgFun(imageFile2);
 
     /*var stream2 = http.ByteStream(
         DelegatingStream.typed(resizeImageFile2.openRead()));
@@ -166,7 +185,11 @@ class _CheckOrderDetailPageState extends State<CheckOrderDetailPage> {
             latitudeVal: currentLocation.latitude,
             longitudeVal: currentLocation.longitude
           //filePic3: resizeImageFile3
-        )));
+        ))).then((r){
+          setState(() {
+            loading = false;
+          });
+    });
   }
 
   @override
@@ -319,7 +342,8 @@ class _CheckOrderDetailPageState extends State<CheckOrderDetailPage> {
                 )
               ],
             ),
-            Padding(
+            loading ? CircularProgressIndicator()
+                : Padding(
               padding: const EdgeInsets.all(20),
               child: SizedBox(
                 width: double.infinity,
